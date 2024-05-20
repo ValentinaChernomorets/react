@@ -1,11 +1,13 @@
 // code - core
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Heading from './Heading';
+// import Heading from './Heading';
 import Food from './Food';
 
 // dev
 import reportWebVitals from './reportWebVitals';
+import { Button } from './ui/Button';
+import { Counter } from './ui/Counter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const foods = [
@@ -15,19 +17,14 @@ const foods = [
 ];
 root.render(
   <React.StrictMode>
-   <Heading text="Restaurant App" />
-   {foods.map(food => (
-      <Food key={food.id} {...food} />
-    ))}
+    <Button 
+      text="sort"
+      backgroundColor="#333"
+      color="#fff" />
+    <Counter 
+      text="inc"
+      backgroundColor="#444"
+      color="#fff" />
   </React.StrictMode>
 );
 reportWebVitals();
-
-// HW1: create a component name Food: which can render a food item in menu
-//    -image
-//    -name
-//    -price
-//    -ingredients
-
-// NOTE: how to render 3 food items?
-// NOTE: what if while rendering we will send an entire food object
