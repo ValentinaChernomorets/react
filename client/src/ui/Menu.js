@@ -5,7 +5,7 @@ const Menu = ({items, sortAsc}) => {
             <h1>MENU</h1>
             <ul>{items
                 .sort(
-                    (item1, item2) => (sortAsc ? 1: -1) * (item1.price - item2.price)
+                    (item1, item2) => (sortAsc ? 1: -1) * (item1.price.amount - item2.price.amount)
                 )
                 .map((item, index) =>
                     <li key={index}>
