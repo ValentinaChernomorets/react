@@ -1,3 +1,5 @@
+import { orderItem } from "../services/DataService" 
+
 const Menu = ({items, sortAsc}) => {
     //react DOM fragment <></>
     return (
@@ -12,8 +14,19 @@ const Menu = ({items, sortAsc}) => {
                         <h2>{item.name}</h2>
                         <img src={item.image} width="100" alt="images"/>
                         <p>{item.price.amount}{item.price.currency}</p>
+                        <button 
+                            onClick={
+                                e => {
+                                    let itemId = e.target.dataset.productId
+                                    orderItem(itemId)
+                                }}
+
+                            data-product-id={item.id}
+                            
+                        >ORDER
+                        </button>
                     </li>
-            )}
+                )}
             </ul>
         </>
     )
