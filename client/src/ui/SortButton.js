@@ -1,7 +1,7 @@
 
 // Module
 // TODO: make the style more compact
-const SortButton = ({text,color,backgroundColor, sortAsc, setSortAsc}) => {
+const SortButton = ({text, color, backgroundColor, sortAsc, setSortAsc}) => {
 
     return (
         <button 

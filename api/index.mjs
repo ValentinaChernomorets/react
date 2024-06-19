@@ -37,6 +37,6 @@ const server = http.createServer((req, res) => {
             message: "not found"
         }))
     }
-})  
+})
 
 server.listen("3001", "localhost")
