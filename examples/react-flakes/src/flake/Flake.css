@@ -1,0 +1,8 @@
+.flake {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50px;
+
+    position: absolute;
+}
