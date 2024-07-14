@@ -1,4 +1,5 @@
-import { orderItem } from "../services/DataService" 
+import { orderItem } from "../services/DataService"
+import Item from './Item'
 import { useState } from "react"
 
 const Menu = ({items, sortAsc}) => {
@@ -14,23 +15,12 @@ const Menu = ({items, sortAsc}) => {
                 .sort(
                     (item1, item2) => (sortAsc ? 1: -1) * (item1.price.amount - item2.price.amount)
                 )
-                .map((item, index) =>
-                    <li key={index}>
-                        <h2>{item.name}</h2>
-                        <img src={item.image} width="100" alt="images"/>
-                        <p>{item.price.amount}{item.price.currency}</p>
-                        <button 
-                            onClick = {
-                                async e => { // <-----wrapper
-                                    let itemId = e.target.dataset.productId
-                                    let data = await orderItem(itemId)
-                                    setMessage(data.message)
-                                } // <-----wrapper
-                            }
-                            data-product-id={item.id}
-                        >ORDER
-                        </button>
-                    </li>
+                .map((item, idx) => <Item {...{idx, item, setMessage, orderItem}} />
+                //  Desctructuring bellow is too work, but this methods is spread  {...{idx, item, setMessage, orderItem}} is more compact and modern
+                //  idx={idx} 
+                //  item={item} 
+                //  setMessage={setMessage} 
+                //  orderItem={orderItem}
                 )}
             </ul>
         </>
