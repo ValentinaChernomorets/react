@@ -1,4 +1,4 @@
-const Item = ({ item, idx, setMessage, orderItem }) => {
+const Item = ({ item, idx, setMessage, orderItem, setCount, setTotal}) => {
     return (
         <li key={idx}>
             <h2>{item.name}</h2>
@@ -7,9 +7,13 @@ const Item = ({ item, idx, setMessage, orderItem }) => {
             <button 
                 onClick = {
                     async e => { // <-----wrapper
-                        let itemId = e.target.dataset.productId
-                        let data = await orderItem(itemId)
-                        setMessage(data.message)
+                        let productId = e.target.dataset.productId
+                        let response = await orderItem(productId)
+                        localStorage.setItem('orderId', response.orderId)
+                        setMessage(response.message)
+                        // HW2: group these values
+                        setCount(response.itemCount)
+                        setTotal({totalAmount: response.totalAmount, totalCurrency: response.totalCurrency})
                     } // <-----wrapper
                 }
                 data-product-id={item.id}

@@ -10,7 +10,6 @@ import { Counter } from './ui/Counter';
 import { App } from './ui/App';
 
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
