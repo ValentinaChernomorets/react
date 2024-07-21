@@ -39,8 +39,7 @@ const server = http.createServer(async (req, res) => {
         req.on('end', async () => {
             let data = JSON.parse(rawData)
             let {email, phone, address} = data
-            await sql`UPDATE orders SET client_email=${email}, client_phone=${phone}, address=${address}  WHERE id=${orderId} `
-
+            await sql`UPDATE orders SET client_email=${email}, client_phone=${phone}, address=${address}  WHERE id=${orderId}`
             // 1. connect to the payment api (paypal)
             // 2. create an order  + orderID
             // 3. get the payment link

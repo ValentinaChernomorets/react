@@ -1,12 +1,13 @@
 import {useState} from 'react'
-import {payOrder} from '../services/DataService'
+import {clientInfo} from '../services/DataService'
 
 const Order = ({count, total}) => {
     let [show, setShow] = useState(false)
     let [delivery, setDelivery] = useState(false)
+    let countTest = total.itemCount === undefined ? count : total.itemCount
     return (
         <span>
-            ORDER: {count} items / {total.totalAmount} {total.totalCurrency}
+            ORDER: {countTest}  items / {total.totalAmount} {total.totalCurrency}
             <button onClick={()=>{
                 setShow(true)
             }}>COMPLETE</button>
@@ -25,17 +26,10 @@ const Order = ({count, total}) => {
                     } <br/>
                     <button onClick={(e)=>{
                         e.preventDefault()
-                        let form = e.target.parentElement
-                        let orderId = localStorage.getItem('orderId')
-                        let checkbox = document.getElementById('delivery');
-                        let client = {
-                            email: form.querySelector('[placeholder="email"]').value,
-                            phone: form.querySelector('[placeholder="phone"]').value,
-                            address: checkbox.checked ? form.querySelector('[placeholder="address"]').value : '',
-                        }
-                        fetch(`http://localhost:3001/api/pay/${orderId}`, {
+                        let clientData = clientInfo(e)
+                        fetch(`http://localhost:3001/api/pay/${clientData.orderId}`, {
                             method: 'POST',
-                            body: JSON.stringify(client)
+                            body: JSON.stringify(clientData.client)
                         })
                             .then((response) => response.json())
                             .then(data => { console.log('pay response', data)
